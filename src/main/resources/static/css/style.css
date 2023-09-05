@@ -1,4 +1,12 @@
-@charset "UTF-8";
-body{
-	background-color: gray;
+
+
+.bg-primary{
+	background-color: aquamarine;
+}
+
+.banner{
+	height: 950px;
+	width: 100%;
+	background:url(../img/x.jpg);
+	color: whiteh;
 }
