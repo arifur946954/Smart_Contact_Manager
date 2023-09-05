@@ -1,4 +1,6 @@
-
+body{
+		background: gray;
+}
 
 .bg-primary{
 	background-color: aquamarine;
@@ -11,4 +13,17 @@
 	background: gray;
 
 	color: white;
+}
+
+
+.registation{
+	background: black;
+	
+}
+
+.my-card{
+	background: white;
+	padding: 20px;
+	border-radius: 5px;
+
 }
