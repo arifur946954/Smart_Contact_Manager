@@ -26,6 +26,14 @@ public class HomeController {
 		
 	}
 	
+	@GetMapping("/SignUp")
+	public String SignUp(Model model) {
+		model.addAttribute("sign","Welcome to my SignUp section");
+		
+		return "SignUp";
+		
+	}
+	
 	
 	
 

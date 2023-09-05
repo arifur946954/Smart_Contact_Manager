@@ -5,8 +5,10 @@
 }
 
 .banner{
-	height: 950px;
+	height: 550px;
 	width: 100%;
-	background:url(../img/x.jpg);
-	color: whiteh;
+	background:url(../../../resources/static/img/banner.jpg);
+	background: gray;
+
+	color: white;
 }
