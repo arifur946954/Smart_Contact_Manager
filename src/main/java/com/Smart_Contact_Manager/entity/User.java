@@ -109,6 +109,14 @@ public class User {
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", enable=" + enable + ", role=" + role
+				+ ", password=" + password + ", image=" + image + ", about=" + about + ", contacts=" + contacts + "]";
+	}
+	
+	
 	
 	
 	

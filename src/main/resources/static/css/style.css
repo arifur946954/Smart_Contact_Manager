@@ -7,7 +7,7 @@ body{
 }
 
 .banner{
-	height: 550px;
+	height: 580px;
 	width: 100%;
 	background:url(../../../resources/static/img/banner.jpg);
 	background: gray;
@@ -15,6 +15,10 @@ body{
 	color: white;
 }
 
+.container{
+	padding-top: 5px;
+
+}
 
 .registation{
 	background: black;

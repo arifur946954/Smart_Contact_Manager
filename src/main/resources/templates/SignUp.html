@@ -8,8 +8,7 @@ th:replace="base::layout(~{::section})"
 </head>
 <body>
 <section>
-<h1 th:text=${sign} >about </h1>
-<h3>you can find a lot of thing from SignUp section</h3>
+
 
 <div class="container">
 	<div class="row">
@@ -21,33 +20,71 @@ th:replace="base::layout(~{::section})"
 					</div>
 				
 				
-				<form>
+				<form action="" th:action="@{/do_register}" method="post" th:object=${user}>
 					
 				<div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input placeholder="name" type="text" class="form-control" id="name">
+    
+    <input 
+    name="name"
+    placeholder="name" 
+    type="text"
+     class="form-control" 
+     id="name"
+     required
+     th:value=${user.name}
+     >
+     
   </div>	
 					
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input placeholder="Email"  required type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <input 
+    name="email"
+    placeholder="Email" 
+     required type="email" 
+     class="form-control"
+      id="exampleInputEmail1"
+       aria-describedby="emailHelp"
+         th:value="${user.email}"
+       >
     
     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input placeholder="Password" required type="password" class="form-control" id="exampleInputPassword1">
+    <input 
+    name="password"
+    placeholder="Password"
+     required type="password" 
+     class="form-control" 
+     id="exampleInputPassword1"
+           th:value=${user.password} 
+     >
   </div>
   
   
   <div class="mb-3">
   <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <textarea
+  name="about"
+   placeholder="Tell me about your self"
+    class="form-control"
+     id="exampleFormControlTextarea1"
+      rows="3"
+       th:value=${user.about}
+      >
+      </textarea>
 </div>
   
   <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <input
+    name="aggrement"
+     type="checkbox" 
+     class="form-check-input" 
+     id="exampleCheck1"
+     >
+    <label class="form-check-label" for="exampleCheck1">I Accept Term and Condition</label>
   </div>
   
   <div class="container text-center ">
