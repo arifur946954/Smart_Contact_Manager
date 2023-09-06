@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Smart_Contact_Manager.Dao.UserRepository;
+import com.Smart_Contact_Manager.Helper.Message;
 import com.Smart_Contact_Manager.entity.User;
+
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -43,27 +46,49 @@ public class HomeController {
 		
 	}
 	
+
+	
 	@RequestMapping(value = "/do_register",method = RequestMethod.POST)
 	public String RegisterUser(
 			@ModelAttribute("user") User user,
 			@RequestParam(value = "aggrement",
 			defaultValue = "false")
-	        boolean aggrement,Model model
+	        boolean aggrement,Model model,
+	        HttpSession session
+	        
+	        
 	        )
 	
+	
 	{  
-		if(!aggrement) {
-			System.out.println("you have to maintain term and condition");
-		}
-		user.setRole("ROLE_USER");
-		user.setEnable(true);
+		try {
+			if(!aggrement) {
+				System.out.println("you have to maintain term and condition");
+				throw new Exception("you have to maintain term and condition");
+			}
+			user.setRole("ROLE_USER");
+			user.setEnable(true);
+			user.setImage("default.png");
 		
-		System.out.println("Aggrement" +aggrement);
-	 System.out.println("User" +user);
-	User result= userRepository.save(user);
-	model.addAttribute(result);
-	     
+			
+			System.out.println("Aggrement" +aggrement);
+		 System.out.println("User" +user);
+		User result= userRepository.save(user);
+		model.addAttribute("user", new User());
+			
+		session.setAttribute("message",new Message("register successfully", "allert-success") );
 		return "SignUp";
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("user", user);
+			/* +e.getMessage() */
+			session.setAttribute("message",new Message("Something ewent wrong and try again", "alert-danger") );
+			return "SignUp";
+		}
+	
+		
 	}
 	
 	

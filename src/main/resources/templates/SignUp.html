@@ -13,9 +13,23 @@ th:replace="base::layout(~{::section})"
 <div class="container">
 	<div class="row">
 		<div class="col-md-8 offset-md-2">
+	
+		
 		
 			<div class="my-card">
 				<div class="text-center">
+					
+					
+				
+                  
+                   <div th:if=${session.mssage} th:classappend=${session.message.type} class="alert alert-primary" role="alert" >
+					    <p th:text="${session.message.content}"></p>
+					     <th:block th:text=${#session.removeAttribute.('message')}></th:block>
+           
+                  </div>
+                  
+                  
+					
 					<h1>Registration Here</h1>
 					</div>
 				
@@ -29,10 +43,12 @@ th:replace="base::layout(~{::section})"
     name="name"
     placeholder="name" 
     type="text"
+   
      class="form-control" 
      id="name"
      required
      th:value=${user.name}
+    
      >
      
   </div>	
