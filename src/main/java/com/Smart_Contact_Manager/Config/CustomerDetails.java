@@ -5,7 +5,16 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.Smart_Contact_Manager.entity.User;
+
 public class CustomerDetails implements UserDetails {
+	private User user;
+	
+
+	public CustomerDetails(User user) {
+		super();
+		this.user = user;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -16,13 +25,13 @@ public class CustomerDetails implements UserDetails {
 	@Override
 	public String getPassword() {
 		// TODO Auto-generated method stub
-		return null;
+		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return null;
+		return user.getEmail();
 	}
 
 	@Override
