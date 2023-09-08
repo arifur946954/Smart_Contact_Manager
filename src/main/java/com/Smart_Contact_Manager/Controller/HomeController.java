@@ -3,8 +3,10 @@ package com.Smart_Contact_Manager.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +16,7 @@ import com.Smart_Contact_Manager.Helper.Message;
 import com.Smart_Contact_Manager.entity.User;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 
@@ -47,13 +50,16 @@ public class HomeController {
 	}
 	
 
+	//here aggrement is name of checkbox
 	
-	@RequestMapping(value = "/do_register",method = RequestMethod.POST)
+	@PostMapping("/do_register")
 	public String RegisterUser(
+			@Valid
 			@ModelAttribute("user") User user,
 			@RequestParam(value = "aggrement",
 			defaultValue = "false")
 	        boolean aggrement,Model model,
+	        BindingResult result1,
 	        HttpSession session
 	        
 	        
@@ -66,6 +72,13 @@ public class HomeController {
 				System.out.println("you have to maintain term and condition");
 				throw new Exception("you have to maintain term and condition");
 			}
+			/*
+			 * if(result1.hasErrors()) { System.out.println("ERROR"+result1.toString());
+			 * model.addAttribute("user",user);
+			 * 
+			 * return "SignUp"; }
+			 */
+			
 			user.setRole("ROLE_USER");
 			user.setEnable(true);
 			user.setImage("default.png");
@@ -76,7 +89,7 @@ public class HomeController {
 		User result= userRepository.save(user);
 		model.addAttribute("user", new User());
 			
-		session.setAttribute("message",new Message("register successfully", "allert-success") );
+		session.setAttribute("messages",new Message("Register successfully", "allert-success") );
 		return "SignUp";
 			
 			
@@ -84,7 +97,8 @@ public class HomeController {
 			e.printStackTrace();
 			model.addAttribute("user", user);
 			/* +e.getMessage() */
-			session.setAttribute("message",new Message("Something ewent wrong and try again", "alert-danger") );
+			session.setAttribute("messages",new Message("Something went"
+				+ " wrong and try again"+e.getMessage(), "alert-danger") );
 			return "SignUp";
 		}
 	

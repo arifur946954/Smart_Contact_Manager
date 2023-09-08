@@ -22,13 +22,24 @@ th:replace="base::layout(~{::section})"
 					
 				
                   
-                   <div th:if=${session.mssage} th:classappend=${session.message.type} class="alert alert-primary" role="alert" >
-					    <p th:text="${session.message.content}"></p>
-					     <th:block th:text=${#session.removeAttribute.('message')}></th:block>
+                <!--<div th:if=${session.messages} th:classappend=${session.messages.type} class="alert alert-primary" role="alert" >
+					    <p th:text="${session.messages.content}"></p>
+					     <th:block th:text=${#session.removeAttribute.('messages')}></th:block>
            
+                  </div>-->
+                  
+                  <div th:if=${session.messages} th:classappend=${session.messages.type} class="alert alert-primary" role="alert">
+					  <p th:text="${session.messages.content}"></p>
+					  
+					<!--<th:block   th:utext=${#session.removeAttribute('messages')}></th:block>-->
+					<!--<th:block th:utext="${#session.removeAttribute.messages}"></th:block>-->
+					<!--<th:block th:remove="${#session.removeAttribute('messages')}"></th:block>-->
+				
                   </div>
                   
+    
                   
+                 
 					
 					<h1>Registration Here</h1>
 					</div>
@@ -36,20 +47,35 @@ th:replace="base::layout(~{::section})"
 				
 				<form action="" th:action="@{/do_register}" method="post" th:object=${user}>
 					
+					
 				<div class="mb-3">
     <label for="name" class="form-label">Name</label>
     
+    
+   <!-- it will be inside class file-->
+       <!--  th:classappend="${#fields.hasError('name')? 'is-invalid': ' '}"-->
     <input 
     name="name"
     placeholder="name" 
     type="text"
+    
+    
    
-     class="form-control" 
+     class="form-control " 
+
      id="name"
      required
      th:value=${user.name}
     
      >
+     
+    
+   <!--  <div  class="invalid-feedback" th:each="e: ${#fields.error(name)}" th:text="${e}">
+     
+    </div>   --> 
+
+  
+  
      
   </div>	
 					
