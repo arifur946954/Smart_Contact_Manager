@@ -1,6 +1,7 @@
 package com.Smart_Contact_Manager.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,8 @@ import javax.validation.Valid;
 
 @Controller
 public class HomeController {
+	@Autowired
+	private BCryptPasswordEncoder passwordEncorder;
 	@Autowired
 	private UserRepository userRepository;
 
@@ -73,6 +76,7 @@ public class HomeController {
 			user.setRole("ROLE_USER");
 			user.setEnable(true);
 			user.setImage("default.png");
+			user.setPassword(passwordEncorder.encode(user.getPassword()));
 
 			System.out.println("Aggrement" + aggrement);
 			System.out.println("User" + user);
